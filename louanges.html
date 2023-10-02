@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sous-catégories de Louanges</title>
+    <style>
+        /* Styles pour le modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        
+        /* Style pour le formulaire dans le modal */
+        .modal-form {
+            text-align: left;
+        }
+        
+        .modal-form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .modal-form textarea,
+        .modal-form input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        .modal-form button {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Sous-catégories de Louanges</h2>
+
+
+
+    <ul id="songList">
+        <li><a href="chanson.html?song=Chanson%201">Chanson 1</a></li>
+        <li><a href="chanson.html?song=Chanson%202">Chanson 2</a></li>
+        <li><a href="chanson.html?song=Chanson%203">Chanson 3</a></li>
+        <li><a href="chanson.html?song=Chanson%204">Chanson 4</a></li>
+        <!-- Ajoutez d'autres sous-catégories au besoin -->
+    </ul>
+
+    
+    <!-- Bouton pour ouvrir le modal -->
+    <button id="openModalBtn">Ajouter nouvelle chanson</button>
+    
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h3>Ajouter nouvelle chanson</h3>
+            <!-- Formulaire pour ajouter une nouvelle chanson -->
+            <form id="addSongForm" class="modal-form">
+                <label for="songName">Nom de la chanson :</label>
+                <input type="text" id="songName" name="songName" required><br>
+
+                <label for="songContent">Contenu de la chanson :</label>
+                <textarea id="songContent" name="songContent" required></textarea><br>
+
+                <label for="songKey">Clé :</label>
+                <input type="text" id="songKey" name="songKey"><br>
+
+                <label for="songRemarks">Remarques :</label>
+                <textarea id="songRemarks" name="songRemarks"></textarea><br>
+
+                <button type="submit">Ajouter</button>
+            </form>
+            
+            <!-- Bouton pour fermer le modal -->
+            <button id="closeModalBtn">Fermer</button>
+        </div>
+    </div>
+    
+    <script>
+        // JavaScript pour ouvrir et fermer le modal
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const modal = document.getElementById('myModal');
+        
+        openModalBtn.addEventListener('click', function () {
+            modal.style.display = 'block';
+        });
+        
+        closeModalBtn.addEventListener('click', function () {
+            modal.style.display = 'none';
+        });
+        
+        // JavaScript pour ajouter une nouvelle chanson à la liste
+        const addSongForm = document.getElementById('addSongForm');
+        const songList = document.getElementById('songList');
+        
+        addSongForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            
+            const songName = document.getElementById('songName').value;
+            
+            if (songName) {
+                const newSongItem = document.createElement('li');
+                newSongItem.textContent = songName;
+                songList.appendChild(newSongItem);
+                addSongForm.reset();
+                modal.style.display = 'none'; // Fermer le modal après ajout
+            }
+        });
+    </script>
+</body>
+</html>
